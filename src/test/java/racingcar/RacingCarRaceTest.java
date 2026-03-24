@@ -6,10 +6,6 @@ import org.junit.jupiter.api.Assumptions.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-
-
 public class RacingCarRaceTest {
     @DisplayName("우승자 확인")
     @Test
@@ -28,4 +24,6 @@ public class RacingCarRaceTest {
         assertArrayEquals(expected, winners);
 
     }
+
+
 }

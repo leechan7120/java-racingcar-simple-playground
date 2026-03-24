@@ -3,7 +3,6 @@ package racingcar;
 import java.util.*;
 
 public class RacingcarRace {
-    int tries = 0;
     Racingcar[] carsInRacing;
     int numberOfCars;
     int numberOfWinners;
@@ -11,10 +10,6 @@ public class RacingcarRace {
 
     String[] splitName(String str) {
         return str.split(",");
-    }
-
-    void setTries(int _tries) {
-        this.tries = _tries;
     }
 
     void doGame() {
@@ -26,20 +21,27 @@ public class RacingcarRace {
 
     }
 
+    void checkNameValidation(String name) {
+        if (name.length() > 5) {
+            throw new IllegalArgumentException("이름은 5글자 이하여야 합니다.");
+        }
+    }
+
     void setCars(String[] carNames) {
         numberOfCars = carNames.length;
         carsInRacing = new Racingcar[numberOfCars];
         for (int i = 0; i < numberOfCars; i++) {
+            checkNameValidation(carNames[i]);
             carsInRacing[i] = new Racingcar(carNames[i]);
         }
     }
 
     void printDistance(Racingcar car) {
-        System.out.println(car.carName + " : ");
+        System.out.print(car.carName + " : ");
         for (int i = 0; i < car.distanceFromStart; i++) {
-            System.out.println("-");
+            System.out.print("-");
         }
-        System.out.println("\n");
+        System.out.print("\n");
     }
 
     String[] getWinner() {
@@ -57,8 +59,8 @@ public class RacingcarRace {
     void printWinner() {
         String[] winners = getWinner();
         for (int i = 0; i < numberOfWinners - 1; i++) {
-            System.out.println(winners[i] + ", ");
+            System.out.print(winners[i] + ", ");
         }
-        System.out.println(winners[numberOfWinners - 1] + "가 최종 우승했습니다.");
+        System.out.print(winners[numberOfWinners - 1] + "(이)가 최종 우승했습니다.");
     }
 }
