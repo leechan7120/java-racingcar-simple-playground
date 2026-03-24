@@ -4,10 +4,11 @@ import java.lang.Math;
 
 public class Racingcar {
     String carName;
-    int distanceFromStart = 0;
+    int distanceFromStart;
 
     public Racingcar(String _carName) {
         this.carName = _carName;
+        distanceFromStart = 0;
     }
 
     int pickRandomInt() {
