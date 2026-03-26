@@ -7,6 +7,12 @@ public class raceGame {
     int numberOfCars;
     int numberOfWinners;
 
+    public raceGame() {
+        numberOfCars = 0;
+        numberOfWinners = 0;
+        carsInRacing = null;
+    }
+
 
     String[] splitName(String str) {
         return str.split(",");
