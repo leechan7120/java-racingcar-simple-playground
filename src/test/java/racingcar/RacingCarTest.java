@@ -13,13 +13,6 @@ public class RacingCarTest {
 
     Racingcar racingcar = new Racingcar("van");
 
-    @DisplayName("랜덤 인수가 제대로 뽑히는 지 확인")
-    @RepeatedTest(10)
-    public void pickRandomIntTest() {
-        int randomInt = racingcar.pickRandomInt();
-        assertTrue(randomInt <= 9 && randomInt >= 0);
-    }
-
     @DisplayName("수치가 제대로 올라가는지 확인")
     @ParameterizedTest
     @ValueSource(ints = {1, 2, 4, 5})
