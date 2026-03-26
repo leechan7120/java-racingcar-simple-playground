@@ -2,7 +2,7 @@ package racingcar;
 
 import java.util.*;
 
-public class RacingcarRace {
+public class raceGame {
     Racingcar[] carsInRacing;
     int numberOfCars;
     int numberOfWinners;
@@ -18,10 +18,9 @@ public class RacingcarRace {
             printDistance(carsInRacing[i]);
         }
         System.out.println("\n");
-
     }
 
-    void checkNameValidation(String name) {
+    void checkNameIsUnderFive(String name) {
         if (name.length() > 5) {
             throw new IllegalArgumentException("이름은 5글자 이하여야 합니다.");
         }
@@ -31,7 +30,7 @@ public class RacingcarRace {
         numberOfCars = carNames.length;
         carsInRacing = new Racingcar[numberOfCars];
         for (int i = 0; i < numberOfCars; i++) {
-            checkNameValidation(carNames[i]);
+            checkNameIsUnderFive(carNames[i]);
             carsInRacing[i] = new Racingcar(carNames[i]);
         }
     }
@@ -49,11 +48,11 @@ public class RacingcarRace {
         numberOfWinners = 0;
         List<String> winners = new ArrayList<>();
         do {
-            winners.add(carsInRacing[RacingcarRace.this.numberOfWinners].carName);
-            RacingcarRace.this.numberOfWinners++;
+            winners.add(carsInRacing[raceGame.this.numberOfWinners].carName);
+            raceGame.this.numberOfWinners++;
         } while (carsInRacing[0].distanceFromStart
-                == carsInRacing[RacingcarRace.this.numberOfWinners].distanceFromStart);
-        return winners.toArray(new String[RacingcarRace.this.numberOfWinners]);
+                == carsInRacing[raceGame.this.numberOfWinners].distanceFromStart);
+        return winners.toArray(new String[raceGame.this.numberOfWinners]);
     }
 
     void printWinner() {
