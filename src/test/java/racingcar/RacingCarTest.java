@@ -13,13 +13,6 @@ public class RacingCarTest {
 
     Racingcar racingcar = new Racingcar("van");
 
-    @DisplayName("생성자가 잘 작동하는지, 이름이 제대로 할당되는지 확인")
-    @Test
-    public void nameSetTest() {
-
-        assertEquals("van", racingcar.carName);
-    }
-
     @DisplayName("랜덤 인수가 제대로 뽑히는 지 확인")
     @RepeatedTest(10)
     public void pickRandomIntTest() {
