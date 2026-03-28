@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class RacingCarTest {
 
-    RacingCar racingcar = new RacingCar("van");
+    RacingCar racingcar = new RacingCar("van", 0);
 
     @DisplayName("수치가 제대로 올라가는지 확인")
     @ParameterizedTest

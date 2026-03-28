@@ -1,98 +1,84 @@
 package racingcar;
 
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.DisplayName;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class RaceGameTest {
-    @DisplayName("우승자 확인")
+
+    @DisplayName("우승자 확인: 공동 우승자가 포함된 경우")
     @Test
     void WinnerTest() {
-        RaceGame race = new RaceGame();
         String[] carNames = {"Adam", "Bro", "July"};
-        race.setCars(carNames);
-        race.carsInRacing[0].distanceFromStart = 3;
-        race.carsInRacing[1].distanceFromStart = 2;
-        race.carsInRacing[2].distanceFromStart = 3;
+        int[] carDistances = {3, 2, 3};
+        RaceGame race = new RaceGame(3, 0, carNames, carDistances);
 
         String[] winners = race.getWinner();
-
         String[] expected = {"Adam", "July"};
 
         assertArrayEquals(expected, winners);
     }
 
-    @DisplayName("이름 분리가 잘 되는지 확인")
-    @Test
-    void splitNameTest() {
-        RaceGame race = new RaceGame();
-        String str = "Joe,Mist,Aio";
-
-        String[] actual = race.splitName(str);
-        String[] expected = {"Joe", "Mist", "Aio"};
-
-        assertArrayEquals(expected, actual);
-    }
-
     @DisplayName("자동차가 게임에 제대로 세팅되는지 확인")
     @Test
     void setCarsTest() {
-        RaceGame race = new RaceGame();
         String[] carNames = {"Joe", "Mist", "Aio"};
-        race.setCars(carNames);
+        int[] distances = {0, 0, 0};
+        RaceGame race = new RaceGame(3, 0, carNames, distances);
 
         assertEquals("Joe", race.carsInRacing[0].carName);
         assertEquals("Mist", race.carsInRacing[1].carName);
         assertEquals("Aio", race.carsInRacing[2].carName);
     }
 
-    @DisplayName("이름이 5글자 이하가 아닐 경우 오류를 검출하는지 확인")
+    @DisplayName("이름이 5글자 초과일 경우 예외가 발생하는지 확인")
     @Test
-    void setCarsErrorTest() {
-        RaceGame race = new RaceGame();
+    void nameLengthErrorTest() {
         String[] carNames = {"Joe", "Mister", "Aio"};
+        int[] distances = {0, 0, 0};
 
-        assertThrows(IllegalArgumentException.class, () -> race.setCars(carNames));
+        assertThrows(IllegalArgumentException.class, () -> {
+            new RaceGame(3, 0, carNames, distances);
+        });
     }
 
-    @DisplayName("출력이 제대로 이루어지는지 확인")
+    @DisplayName("출력 형식이 요구사항과 일치하는지 확인")
     @Test
-    void printTest() {
-        RaceGame race = new RaceGame();
+    void printDistanceTest() {
         String[] names = {"Miro"};
+        int[] distances = {3};
+        RaceGame race = new RaceGame(1, 0, names, distances);
+
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         PrintStream original = System.out;
         System.setOut(new PrintStream(outputStream));
 
-        race.setCars(names);
-        race.carsInRacing[0].distanceFromStart = 3;
         race.printDistance(race.carsInRacing[0]);
 
         assertEquals("Miro : ---\n", outputStream.toString());
+
         System.setOut(original);
     }
 
-    @DisplayName("승자가 제대로 출력되는지 확인")
+    @DisplayName("최종 승자 메시지가 올바르게 출력되는지 확인")
     @Test
     void printWinnerTest() {
-        RaceGame race = new RaceGame();
+        String[] carNames = {"Adam", "Bro", "July"};
+        int[] distances = {3, 2, 3};
+        RaceGame race = new RaceGame(3, 0, carNames, distances);
 
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         PrintStream original = System.out;
         System.setOut(new PrintStream(outputStream));
-
-        String[] carNames = {"Adam", "Bro", "July"};
-        race.setCars(carNames);
-        race.carsInRacing[0].distanceFromStart = 3;
-        race.carsInRacing[1].distanceFromStart = 2;
-        race.carsInRacing[2].distanceFromStart = 3;
 
         race.printWinner();
 
         assertEquals("Adam, July(이)가 최종 우승했습니다.", outputStream.toString());
+
         System.setOut(original);
     }
 }
