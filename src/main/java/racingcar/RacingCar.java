@@ -2,11 +2,11 @@ package racingcar;
 
 import java.lang.Math;
 
-public class Racingcar {
+public class RacingCar {
     String carName;
     int distanceFromStart;
 
-    public Racingcar(String _carName) {
+    public RacingCar(String _carName) {
         this.carName = _carName;
         distanceFromStart = 0;
     }

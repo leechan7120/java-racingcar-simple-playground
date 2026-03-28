@@ -11,7 +11,7 @@ public class RaceGameTest {
     @DisplayName("우승자 확인")
     @Test
     void WinnerTest() {
-        raceGame race = new raceGame();
+        RaceGame race = new RaceGame();
         String[] carNames = {"Adam", "Bro", "July"};
         race.setCars(carNames);
         race.carsInRacing[0].distanceFromStart = 3;
@@ -28,7 +28,7 @@ public class RaceGameTest {
     @DisplayName("이름 분리가 잘 되는지 확인")
     @Test
     void splitNameTest() {
-        raceGame race = new raceGame();
+        RaceGame race = new RaceGame();
         String str = "Joe,Mist,Aio";
 
         String[] actual = race.splitName(str);
@@ -40,7 +40,7 @@ public class RaceGameTest {
     @DisplayName("자동차가 게임에 제대로 세팅되는지 확인")
     @Test
     void setCarsTest() {
-        raceGame race = new raceGame();
+        RaceGame race = new RaceGame();
         String[] carNames = {"Joe", "Mist", "Aio"};
         race.setCars(carNames);
 
@@ -52,7 +52,7 @@ public class RaceGameTest {
     @DisplayName("이름이 5글자 이하가 아닐 경우 오류를 검출하는지 확인")
     @Test
     void setCarsErrorTest() {
-        raceGame race = new raceGame();
+        RaceGame race = new RaceGame();
         String[] carNames = {"Joe", "Mister", "Aio"};
 
         assertThrows(IllegalArgumentException.class, () -> race.setCars(carNames));
@@ -61,7 +61,7 @@ public class RaceGameTest {
     @DisplayName("출력이 제대로 이루어지는지 확인")
     @Test
     void printTest() {
-        raceGame race = new raceGame();
+        RaceGame race = new RaceGame();
         String[] names = {"Miro"};
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         PrintStream original = System.out;
@@ -78,7 +78,7 @@ public class RaceGameTest {
     @DisplayName("승자가 제대로 출력되는지 확인")
     @Test
     void printWinnerTest() {
-        raceGame race = new raceGame();
+        RaceGame race = new RaceGame();
 
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         PrintStream original = System.out;

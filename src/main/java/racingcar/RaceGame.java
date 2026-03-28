@@ -2,12 +2,12 @@ package racingcar;
 
 import java.util.*;
 
-public class raceGame {
-    Racingcar[] carsInRacing;
+public class RaceGame {
+    RacingCar[] carsInRacing;
     int numberOfCars;
     int numberOfWinners;
 
-    public raceGame() {
+    public RaceGame() {
         numberOfCars = 0;
         numberOfWinners = 0;
         carsInRacing = null;
@@ -34,14 +34,14 @@ public class raceGame {
 
     void setCars(String[] carNames) {
         numberOfCars = carNames.length;
-        carsInRacing = new Racingcar[numberOfCars];
+        carsInRacing = new RacingCar[numberOfCars];
         for (int i = 0; i < numberOfCars; i++) {
             checkNameIsUnderFive(carNames[i]);
-            carsInRacing[i] = new Racingcar(carNames[i]);
+            carsInRacing[i] = new RacingCar(carNames[i]);
         }
     }
 
-    void printDistance(Racingcar car) {
+    void printDistance(RacingCar car) {
         System.out.print(car.carName + " : ");
         for (int i = 0; i < car.distanceFromStart; i++) {
             System.out.print("-");
@@ -50,15 +50,15 @@ public class raceGame {
     }
 
     String[] getWinner() {
-        Arrays.sort(carsInRacing, Comparator.comparingInt((Racingcar p) -> p.distanceFromStart).reversed());
+        Arrays.sort(carsInRacing, Comparator.comparingInt((RacingCar p) -> p.distanceFromStart).reversed());
         numberOfWinners = 0;
         List<String> winners = new ArrayList<>();
         do {
-            winners.add(carsInRacing[raceGame.this.numberOfWinners].carName);
-            raceGame.this.numberOfWinners++;
+            winners.add(carsInRacing[RaceGame.this.numberOfWinners].carName);
+            RaceGame.this.numberOfWinners++;
         } while (carsInRacing[0].distanceFromStart
-                == carsInRacing[raceGame.this.numberOfWinners].distanceFromStart);
-        return winners.toArray(new String[raceGame.this.numberOfWinners]);
+                == carsInRacing[RaceGame.this.numberOfWinners].distanceFromStart);
+        return winners.toArray(new String[RaceGame.this.numberOfWinners]);
     }
 
     void printWinner() {
