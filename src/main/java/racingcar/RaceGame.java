@@ -7,15 +7,13 @@ public class RaceGame {
     int numberOfCars;
     int numberOfWinners;
 
-    public RaceGame() {
-        numberOfCars = 0;
-        numberOfWinners = 0;
-        carsInRacing = null;
-    }
-
-
-    String[] splitName(String str) {
-        return str.split(",");
+    public RaceGame(int numberOfCars, int numberOfWinners, String[] carNames, int[] distanceOfCars) {
+        this.numberOfCars = numberOfCars;
+        this.numberOfWinners = numberOfWinners;
+        this.carsInRacing = new RacingCar[numberOfCars];
+        for (int i = 0; i < this.numberOfCars; i++) {
+            this.carsInRacing[i] = new RacingCar(carNames[i], distanceOfCars[i]);
+        }
     }
 
     void doGame() {
@@ -24,21 +22,6 @@ public class RaceGame {
             printDistance(carsInRacing[i]);
         }
         System.out.println("\n");
-    }
-
-    void checkNameIsUnderFive(String name) {
-        if (name.length() > 5) {
-            throw new IllegalArgumentException("이름은 5글자 이하여야 합니다.");
-        }
-    }
-
-    void setCars(String[] carNames) {
-        numberOfCars = carNames.length;
-        carsInRacing = new RacingCar[numberOfCars];
-        for (int i = 0; i < numberOfCars; i++) {
-            checkNameIsUnderFive(carNames[i]);
-            carsInRacing[i] = new RacingCar(carNames[i]);
-        }
     }
 
     void printDistance(RacingCar car) {

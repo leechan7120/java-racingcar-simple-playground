@@ -6,9 +6,16 @@ public class RacingCar {
     String carName;
     int distanceFromStart;
 
-    public RacingCar(String _carName) {
+    public RacingCar(String _carName, int distanceFromStart) {
+        checkNameIsUnderFive(_carName);
         this.carName = _carName;
-        distanceFromStart = 0;
+        this.distanceFromStart = distanceFromStart;
+    }
+
+    void checkNameIsUnderFive(String name) {
+        if (name.length() > 5) {
+            throw new IllegalArgumentException("이름은 5글자 이하여야 합니다.");
+        }
     }
 
     int pickRandomInt() {

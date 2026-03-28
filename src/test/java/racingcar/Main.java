@@ -4,12 +4,17 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        RaceGame race = new RaceGame();
+        Scanner sc = new Scanner(System.in);
 
         System.out.println("경주할 자동차 이름을 입력하세요(이름은 쉼표(,)를 기준으로 구분).");
-        Scanner sc = new Scanner(System.in);
         String nameString = sc.nextLine();
-        race.setCars(race.splitName(nameString));
+
+        String[] carNames = nameString.split(",");
+        int numberOfCars = carNames.length;
+
+        int[] initialDistances = new int[numberOfCars];
+
+        RaceGame race = new RaceGame(numberOfCars, 0, carNames, initialDistances);
 
         System.out.println("시도할 횟수는 몇 회인가요?");
         int numberOfGames = sc.nextInt();
@@ -20,5 +25,7 @@ public class Main {
         }
 
         race.printWinner();
+
+        sc.close();
     }
 }
